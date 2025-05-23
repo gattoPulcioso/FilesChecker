@@ -19,7 +19,7 @@ To run this application locally, follow these steps:
 2.  **Clone the repository:**
     ```bash
     git clone <repository-url> # Replace <repository-url> with the actual URL
-    cd text-editor-verifica
+    cd FilesChecker
     ```
 3.  **Install dependencies:**
     ```bash
