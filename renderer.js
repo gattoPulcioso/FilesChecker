@@ -78,6 +78,14 @@ document.getElementById('select-folder').addEventListener('click', async () => {
     }
 });
 
+document.getElementById('parent-folder-button').addEventListener('click', () => {
+    const parentDir = window.api.joinPath(currentDir, '..');
+    if (parentDir !== currentDir) { // Check if it's not the root directory
+        currentDir = parentDir;
+        loadFiles();
+    }
+});
+
 document.getElementById('save-file').addEventListener('click', async () => {
     console.log('Save file button clicked'); // Debug
     const editor = document.getElementById('editor');
