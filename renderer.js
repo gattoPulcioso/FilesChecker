@@ -42,9 +42,11 @@ async function loadFiles() {
                 const content = await window.api.readFile(fullPath);
                 const editor = document.getElementById('editor');
                 editor.value = content;
-                editor.oninput = () => {
-                    window.api.writeFile(fullPath, editor.value);
-                };
+
+                // Rimuovi o commenta questa parte per disabilitare il salvataggio automatico
+                // editor.oninput = () => {
+                //     window.api.writeFile(fullPath, editor.value);
+                // };
             });
         } else if (stats.isDirectory()) {
             label.textContent = "📁 " + file; // Add folder icon
@@ -86,7 +88,7 @@ document.getElementById('parent-folder-button').addEventListener('click', () => 
     }
 });
 
-document.getElementById('save-file').addEventListener('click', async () => {
+document.getElementById('save-file-button').addEventListener('click', async () => {
     console.log('Save file button clicked'); // Debug
     const editor = document.getElementById('editor');
     const content = editor.value;
@@ -102,6 +104,34 @@ document.getElementById('save-file').addEventListener('click', async () => {
     } catch (error) {
         console.error('Error saving file:', error);
         alert('Failed to save the file.');
+    }
+});
+
+window.addEventListener('keydown', async (event) => {
+    if (event.ctrlKey && event.key === 's') { // Rileva "Ctrl + S"
+        event.preventDefault(); // Previene il comportamento predefinito del browser
+        console.log('Ctrl + S pressed'); // Debug
+
+        const editor = document.getElementById('editor');
+        if (!editor) {
+            console.error('Editor element not found');
+            return;
+        }
+
+        const content = editor.value;
+
+        try {
+            const savedPath = await window.api.saveFile(content);
+            if (savedPath) {
+                console.log('File saved successfully at:', savedPath);
+                alert('File saved successfully!');
+            } else {
+                console.log('File save canceled');
+            }
+        } catch (error) {
+            console.error('Error saving file:', error);
+            alert('Failed to save the file.');
+        }
     }
 });
 

@@ -82,8 +82,8 @@ app.whenReady().then(() => {
         title: 'Save File',
         defaultPath: 'untitled.txt',
         filters: [
-            { name: 'Text Files', extensions: ['txt'] },
-            { name: 'All Files', extensions: ['*'] }
+            { name: 'All Files', extensions: ['*'] }/* ,
+            { name: 'Text Files', extensions: ['txt'] } */
         ]
     });
 

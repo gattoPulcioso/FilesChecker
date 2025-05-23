@@ -63,3 +63,19 @@
 #select-folder:hover {
   background-color: #357ABD; /* Darker blue on hover */
 }
+
+#save-file-button {
+  background-color: #4A90E2; /* Muted blue */
+  color: #FFFFFF; /* White text */
+  padding: 10px 20px; /* Padding */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* No default border */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 1em; /* Match surrounding text size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+  margin-right: 10px; /* Space between buttons */
+}
+
+#save-file-button:hover {
+  background-color: #357ABD; /* Darker blue on hover */
+}
