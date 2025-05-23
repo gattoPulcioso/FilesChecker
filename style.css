@@ -5,7 +5,7 @@
   
   #file-list {
     width: 250px;
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #e0e0e0; /* Lighter border */
     overflow-y: auto;
     padding: 10px;
   }
@@ -13,7 +13,12 @@
   .file-item {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* Increased margin */
+    padding: 4px 0px; /* Added padding */
+  }
+  
+  .file-item:hover {
+    background-color: #f0f0f0; /* Hover effect */
   }
   
   .file-item input {
@@ -27,4 +32,18 @@
     border: none;
     outline: none;
   }
-  
+
+#select-folder {
+  background-color: #4A90E2; /* Muted blue */
+  color: #FFFFFF; /* White text */
+  padding: 10px 20px; /* Padding */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* No default border */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 1em; /* Match surrounding text size */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+#select-folder:hover {
+  background-color: #357ABD; /* Darker blue on hover */
+}
