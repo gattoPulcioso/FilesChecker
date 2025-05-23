@@ -1,13 +1,14 @@
-# Text Editor Verifca
+# Text Editor with check.
 
-Editor con file check
+I often have to check many files or folders, so I needed a tool to do it quickly and conveniently.
 
 ## Features
 
 - Select a folder to view its files.
 - Display a list of files in the selected folder.
 - Open and edit text files.
-- Save changes to files.
+- Save changes to files: file changes are saved automatically.
+- Files that have been checked as verified are kept in memory.
 
 ## How to Run
 
@@ -39,6 +40,4 @@ To run this application locally, follow these steps:
 
 ## Future Enhancements
 
-- Implement or clarify the "file check" functionality mentioned in the project description.
-- Add more robust error handling for file operations.
 - Allow customization of the editor (e.g., themes, font sizes).
