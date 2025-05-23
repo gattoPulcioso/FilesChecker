@@ -39,5 +39,6 @@ To run this application locally, follow these steps:
 
 ## Future Enhancements
 
+- Implement or clarify the "file check" functionality mentioned in the project description.
 - Add more robust error handling for file operations.
 - Allow customization of the editor (e.g., themes, font sizes).

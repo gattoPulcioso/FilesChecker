@@ -28,19 +28,43 @@ app.whenReady().then(() => {
   });
   
   ipcMain.handle('read-dir', async (event, dirPath) => {
-      return await fs.readdir(dirPath);
+    try {
+      const files = await fs.readdir(dirPath);
+      return { success: true, data: files };
+    } catch (error) {
+      console.error('Error reading directory:', error);
+      return { success: false, error: 'Failed to read directory. Please check permissions and if the directory exists.' };
+    }
   });
   
   ipcMain.handle('read-file', async (event, filePath) => {
-      return await fs.readFile(filePath, 'utf8');
+    try {
+      const content = await fs.readFile(filePath, 'utf8');
+      return { success: true, data: content };
+    } catch (error) {
+      console.error('Error reading file:', error);
+      return { success: false, error: 'Failed to read file. Please check permissions and if the file exists.' };
+    }
   });
   
   ipcMain.handle('write-file', async (event, filePath, content) => {
+    try {
       await fs.writeFile(filePath, content, 'utf8');
+      return { success: true };
+    } catch (error) {
+      console.error('Error writing file:', error);
+      return { success: false, error: 'Failed to write file. Please check permissions or disk space.' };
+    }
   });
   
-  ipcMain.handle('stat', async (event, path) => {
-      return await fs.stat(path);
+  ipcMain.handle('stat', async (event, itemPath) => {
+    try {
+      const stats = await fs.stat(itemPath);
+      return { success: true, data: stats };
+    } catch (error) {
+      console.error('Error getting file stats:', error);
+      return { success: false, error: 'Failed to get file stats. Please check if the file or directory exists.' };
+    }
   });
 
   ipcMain.handle('select-folder', async () => {
@@ -48,7 +72,7 @@ app.whenReady().then(() => {
     const result = await dialog.showOpenDialog({
       properties: ['openDirectory']
     });
-    if (result.canceled || result.filePaths.length === 0) return null;
+    if (result.canceled || result.filePaths.length === 0) return null; // This handler might need similar error handling updates later
     return result.filePaths[0];
   });
 
@@ -56,24 +80,24 @@ app.whenReady().then(() => {
     console.log('Save file button clicked'); // Debug
     const result = await dialog.showSaveDialog({
         title: 'Save File',
-        defaultPath: 'untitled.txt', // Nome predefinito del file
+        defaultPath: 'untitled.txt',
         filters: [
             { name: 'Text Files', extensions: ['txt'] },
             { name: 'All Files', extensions: ['*'] }
         ]
     });
 
-    if (result.canceled || !result.filePath) return null;
+    if (result.canceled || !result.filePath) {
+      return { success: false, error: 'Save operation canceled by user.', canceled: true };
+    }
 
     try {
         await fs.writeFile(result.filePath, content, 'utf8');
         console.log('File saved at:', result.filePath); // Debug
-        return result.filePath;
+        return { success: true, filePath: result.filePath };
     } catch (error) {
         console.error('Error saving file:', error);
-        throw error;
+        return { success: false, error: 'Failed to save file. Please check permissions or disk space.' };
     }
   });
 });
-
-
