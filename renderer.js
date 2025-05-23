@@ -34,9 +34,10 @@ async function loadFiles() {
         });
 
         const label = document.createElement('span');
-        label.textContent = file;
+        // label.textContent is now set conditionally below
 
         if (stats.isFile()) {
+            label.textContent = "📄 " + file; // Add file icon
             label.addEventListener('click', async () => {
                 const content = await window.api.readFile(fullPath);
                 const editor = document.getElementById('editor');
@@ -46,11 +47,15 @@ async function loadFiles() {
                 };
             });
         } else if (stats.isDirectory()) {
+            label.textContent = "📁 " + file; // Add folder icon
             label.style.fontWeight = 'bold'; // Stile per distinguere le cartelle
             label.addEventListener('click', () => {
                 currentDir = fullPath;
                 loadFiles(); // Ricarica i file nella nuova directory
             });
+        } else {
+            // Fallback for other types (e.g., symlinks, etc.)
+            label.textContent = file; 
         }
 
         fileItem.appendChild(checkbox);
@@ -95,4 +100,3 @@ document.getElementById('save-file').addEventListener('click', async () => {
 window.onload = () => {
     loadFiles();
 };
-
