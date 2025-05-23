@@ -8,7 +8,7 @@ I often have to check many files or folders, so I needed a tool to do it quickly
 - Display a list of files in the selected folder.
 - Open and edit text files.
 - Save changes to files: file changes are saved automatically.
-- Files that have been checked as verified are kept in memory.
+- Files and folders that have been checked as verified are kept in memory.
 
 ## How to Run
 
